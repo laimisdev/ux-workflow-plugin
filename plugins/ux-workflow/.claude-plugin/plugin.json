@@ -1,0 +1,9 @@
+{
+  "name": "ux-workflow",
+  "description": "A two-phase workflow for UX (re)design projects: synthesize raw inputs into a structured doc set (project-intake), then build the screens as a componentized, wired clickable prototype in Figma under fixed house rules (figma-ux-prototype).",
+  "author": {
+    "name": "Laimonas",
+    "email": "laimonas@rimti.lt"
+  },
+  "keywords": ["ux", "figma", "design", "workflow", "prototype", "intake"]
+}

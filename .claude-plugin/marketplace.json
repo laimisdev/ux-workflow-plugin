@@ -1,0 +1,15 @@
+{
+  "name": "rimti",
+  "owner": {
+    "name": "Laimonas",
+    "email": "laimonas@rimti.lt"
+  },
+  "plugins": [
+    {
+      "name": "ux-workflow",
+      "source": "./plugins/ux-workflow",
+      "description": "Two-phase UX (re)design workflow: project-intake (synthesize inputs into a structured doc set) + figma-ux-prototype (build the screens as a componentized, wired prototype under house rules).",
+      "category": "design"
+    }
+  ]
+}
