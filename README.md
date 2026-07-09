@@ -27,9 +27,9 @@ Inside Claude Code:
 /plugin install ux-workflow@rimti
 ```
 
-- This repo is **private**, so each teammate needs read access to
-  `github.com/laimisdev/ux-workflow-plugin` and a working `gh`/git login. A full
-  `https://` git URL or a local clone path also work as the marketplace source.
+- The repo is **public**, so this works with no GitHub account and no auth — the
+  marketplace clones anonymously. A full `https://` git URL or a local clone path
+  also work as the source.
 - `rimti` is the **marketplace name** (set in `.claude-plugin/marketplace.json`) —
   the install target is always `<plugin>@<marketplace>`.
 
