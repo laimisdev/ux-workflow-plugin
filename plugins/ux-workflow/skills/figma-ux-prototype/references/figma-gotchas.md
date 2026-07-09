@@ -34,9 +34,11 @@ supplementary.
 
 ## Reactions / prototype
 
-- **Setting reactions on an instance overrides inherited ones.** See the
-  hover-merge rule in `house-rules.md` — clone and prepend the main's hover-family
-  reactions when adding a nav reaction to a DS-derived instance.
+- **Setting reactions on an instance replaces inherited ones.** See the
+  hover-merge rule in `house-rules.md`: on nav targets (buttons, links, cards)
+  clone the inherited `ON_HOVER` and set it alongside your `ON_CLICK`. Form
+  controls own their `ON_CLICK` state toggle and are never nav sources, so you
+  never override them.
 - **Wire nav on mains, on the same page as the screens.** Cross-page inherited
   reactions are ignored by Figma at runtime.
 - **`overlayPositionType` / `overlayBackground` are read-only** via the plugin

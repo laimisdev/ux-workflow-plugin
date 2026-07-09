@@ -27,14 +27,18 @@ sessions **extend** rather than rebuild.
   logo→Home, cart→Cart, nav items→their pages get wired once on the header main
   and every screen inherits them. Screen-specific CTAs (hero→finder, add→cart) are
   wired at the instance level.
-- **Hover-merge rule (critical):** adding a reaction to a DS-derived instance
-  *overrides* the reactions it inherited from its main — including the
-  `ON_HOVER` → hover-state change that makes buttons feel alive. So when you add a
-  nav reaction to such an instance, **merge**: clone the main component's
-  hover-family reactions (`ON_HOVER`, `WHILE_PRESSING`, etc. — skip its `ON_CLICK`
-  state toggle) and prepend them:
-  `setReactionsAsync([...mainHoverClones, navReaction])`. Always do this on
-  DS-derived instances.
+- **Hover-merge rule (critical):** setting a reaction on a DS-derived instance
+  *replaces* everything it inherited from its main — including the `ON_HOVER`
+  state change that makes buttons feel alive. You only hit this on the components
+  you wire nav/overlays onto — **buttons, links, cards** — which carry an
+  `ON_HOVER` and leave the click open. So the merge is always the same: clone the
+  inherited `ON_HOVER` and set it alongside your new `ON_CLICK`:
+  `setReactionsAsync([...hoverClones, navReaction])`. **Form controls** (inputs,
+  radios, checkboxes) are what own a baked-in `ON_CLICK`, but that's their own
+  state toggle and they're never a nav source, so you never override them — leave
+  them inheriting untouched. *(General fallback if a DS ever puts other triggers
+  on a nav target: re-clone every inherited reaction on a trigger other than the
+  `ON_CLICK` you're adding.)*
 - **Transition rules (keep consistent across the whole file):**
   - Screen→screen `NAVIGATE`: `transition: null` (static, like a real page load).
   - Component state `CHANGE_TO`: `SMART_ANIMATE` (usually inherited from the DS).
