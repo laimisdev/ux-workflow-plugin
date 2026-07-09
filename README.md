@@ -23,19 +23,20 @@ non-Figma project can use just the intake phase).
 Inside Claude Code:
 
 ```
-/plugin marketplace add <your-org>/ux-workflow-plugin
+/plugin marketplace add laimisdev/ux-workflow-plugin
 /plugin install ux-workflow@rimti
 ```
 
-- Replace `<your-org>/ux-workflow-plugin` with this repo's GitHub `owner/repo`
-  once it's pushed (a full `https://…​.git` URL or a local path also work).
+- This repo is **private**, so each teammate needs read access to
+  `github.com/laimisdev/ux-workflow-plugin` and a working `gh`/git login. A full
+  `https://` git URL or a local clone path also work as the marketplace source.
 - `rimti` is the **marketplace name** (set in `.claude-plugin/marketplace.json`) —
   the install target is always `<plugin>@<marketplace>`.
 
 Verify with `/plugin list`. Non-interactive equivalent:
 
 ```bash
-claude plugin marketplace add <your-org>/ux-workflow-plugin
+claude plugin marketplace add laimisdev/ux-workflow-plugin
 claude plugin install ux-workflow@rimti
 ```
 
@@ -45,7 +46,7 @@ To enable it automatically for everyone in a given project, add to that project'
 ```json
 {
   "extraKnownMarketplaces": {
-    "rimti": { "source": { "source": "github", "repo": "<your-org>/ux-workflow-plugin" } }
+    "rimti": { "source": { "source": "github", "repo": "laimisdev/ux-workflow-plugin" } }
   },
   "enabledPlugins": { "ux-workflow@rimti": true }
 }
@@ -68,12 +69,15 @@ ux-workflow-plugin/                     ← git repo = marketplace
 ├── plugins/
 │   └── ux-workflow/
 │       ├── .claude-plugin/plugin.json
+│       ├── DEVELOPING.md               ← how to re-optimize skill descriptions
 │       └── skills/
 │           ├── project-intake/
 │           │   ├── SKILL.md
+│           │   ├── evals/trigger-eval.json
 │           │   └── references/templates.md
 │           └── figma-ux-prototype/
 │               ├── SKILL.md
+│               ├── evals/trigger-eval.json
 │               └── references/{house-rules,figma-gotchas}.md
 └── README.md
 ```
