@@ -1,19 +1,25 @@
 ---
 name: figma-ux-prototype
 description: >-
-  Build or extend UX wireframe/prototype screens in Figma from structured layout
+  Build or extend UX wireframe/prototype SCREENS in Figma from structured layout
   specs, under a fixed set of house rules: use ONLY the design system already in
   the Figma file (no new visual styling), turn every repeated element into a
   component and place instances (never copy-paste), always wire a clickable
   prototype (navigation on the MAIN components, hover reactions merged not
-  overwritten, agreed transition rules), and extend rather than rebuild. Use this
-  whenever the user wants to create, build, assemble, lay out, or extend UX
+  overwritten, agreed transition rules), and extend rather than rebuild. Reach for
+  it whenever the user wants to create, build, assemble, lay out, or extend UX
   screens, wireframes, or a clickable prototype in Figma — especially the
-  structure/IA/wireframe phase before visual design — even if they only say
-  "build the screens in Figma", "make the prototype", or "add these pages to the
-  file". This complements the Figma MCP's /figma-use and /figma-generate-design
-  skills: those handle the Figma operations, this adds the spec-driven process and
-  the team's house rules on top. Load it before building UX layouts in Figma.
+  structure/IA/wireframe phase before visual design — e.g. "build the screens in
+  Figma", "make the prototype", "add these pages to the file", "wire the flow",
+  "lay out the PDP using our design system". It complements the Figma MCP's
+  /figma-use and /figma-generate-design skills (they do the Figma operations; this
+  adds the spec-driven process and house rules). It assumes the design system
+  already exists in the file, so do NOT use it for: visual or brand design like
+  choosing colors/fonts or restyling (a later phase); building a design system or
+  component library from scratch (use /figma-generate-library); converting a Figma
+  design INTO code (design-to-code); merely inspecting or reading an existing
+  file; FigJam diagrams; Figma Slides decks; or building screens in real code
+  (React/Next) rather than in Figma.
 ---
 
 # Figma UX prototype — build screens from specs, under house rules

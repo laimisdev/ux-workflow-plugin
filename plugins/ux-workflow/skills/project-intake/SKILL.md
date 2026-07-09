@@ -1,18 +1,23 @@
 ---
 name: project-intake
 description: >-
-  Synthesize scattered project inputs — a live site to redesign, a sitemap or IA
-  export, a written brief, stakeholder or workshop notes, meeting transcripts,
-  competitor links — into a structured, durable set of project documents: a
-  project brief, a sitemap that becomes the single source of truth, a numbered
-  requirements list, per-screen layout specs, and a copy deck. This is the FIRST
-  phase of any website or app (re)design project: run it before design or build
-  work so every later step reads from stable, agreed docs instead of scattered
-  inputs. Use it whenever the user has raw or messy project material (URLs, notes,
-  exports, transcripts, a brief) and wants it organized, structured, synthesized,
-  or "made sense of" — even if they don't say "intake", e.g. "help me structure
-  this project", "turn these notes and this sitemap into specs", "set up the
-  project docs", "organize everything we know about this redesign".
+  Synthesize scattered, multi-source project inputs — a live site to redesign, a
+  sitemap or IA export, a written brief, stakeholder or workshop notes, meeting
+  transcripts, competitor links — into a structured, durable set of project
+  documents: a project brief, a sitemap that becomes the single source of truth,
+  a numbered requirements list, per-screen layout specs, and a copy deck. This is
+  the FIRST phase of any website or app (re)design project — run it before design
+  or build work so every later step reads from stable, agreed docs instead of
+  scattered inputs. Reach for it whenever the user has raw or messy project
+  material and wants it organized, structured, synthesized, or "made sense of",
+  even if they don't say "intake" — e.g. "help me structure this project", "turn
+  these notes and this sitemap into specs", "set up the project docs", "write up
+  the requirements and screen specs", "organize everything we know about this
+  redesign". Its job is turning MULTIPLE inputs into that doc set — so do NOT use
+  it for building or wiring screens/prototypes (that's the figma-ux-prototype
+  skill), scaffolding a code project or repo, summarizing a single document,
+  drawing a FigJam diagram, writing marketing/UI copy on its own, or standalone
+  competitive research or PRD critiques.
 ---
 
 # Project intake — turn raw inputs into a structured doc set
