@@ -40,8 +40,11 @@ supplementary.
 - **Wire nav on mains, on the same page as the screens.** Cross-page inherited
   reactions are ignored by Figma at runtime.
 - **`overlayPositionType` / `overlayBackground` are read-only** via the plugin
-  API — use the transparent-full-viewport-frame overlay pattern (see
-  `house-rules.md`).
+  API — so wire the `OVERLAY` reaction directly to the natural-size dialog/drawer
+  frame and leave position/background at their defaults for a human to set in the
+  Figma UI. Do **not** wrap the overlay in a full-viewport frame with the modal
+  nested inside; it points the prototype link at the wrapper and makes
+  re-prototyping harder (see the overlay pattern in `house-rules.md`).
 
 ## Design-system conventions
 

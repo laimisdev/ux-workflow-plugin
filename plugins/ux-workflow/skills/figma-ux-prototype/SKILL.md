@@ -86,7 +86,9 @@ what makes the next person's work harder.
 3. **Build each screen as a composition of instances**, following its layout spec
    for structure/hierarchy/content/states. Use the copy deck for all text.
 4. **Wire the prototype**: nav on mains (rule 3), screen-specific CTAs on instances,
-   overlays via Figma's native overlay actions. Apply the agreed transition rules.
+   overlays via Figma's native overlay actions — wired to the natural-size frame,
+   position/scrim left default and flagged for the human. Apply the agreed
+   transition rules.
 5. **Add states and variants** the specs call for (empty/loading/error, logged-in
    vs guest, made-to-order vs in-stock, etc.) as component variants, not one-off
    frames, wherever they repeat.
@@ -102,8 +104,9 @@ languages is a later pass.
 ## Record the build state
 
 After a build session, write down — in the project's notes or your persistent
-memory — the file key, the key component node IDs, what screens exist, and the
-conventions used. This is what lets the next session *extend, don't rebuild*. The
+memory — the file key, the key component node IDs, what screens exist, the
+conventions used, and any overlays left at default position/scrim for a human to
+finish. This is what lets the next session *extend, don't rebuild*. The
 next person should be able to find the header component and instance it without
 re-reading the whole file.
 

@@ -48,12 +48,29 @@ Use Figma's native overlay actions: triggers with `navigation: 'OVERLAY'`,
 closers with `{type: 'CLOSE'}` (X button, scrim tap, "Cancel"), banner→settings
 with `navigation: 'SWAP'`.
 
-**API limitation:** `overlayPositionType` and `overlayBackground` are **read-only**
-via the plugin API. Work around it: make the overlay frame the **full viewport
-size with transparent fill** (`fills = []`), and position the actual scrim /
-drawer / modal *inside* it. The default CENTER position then covers the viewport
-exactly and the underlying page shows through the transparent areas. (A
-non-blocking banner, like cookie consent, can be scrim-less.)
+**Keep the overlay frame at its natural size** and wire the `OVERLAY` reaction
+**directly to that frame** — a small dialog stays a small dialog, a drawer stays
+drawer-width. Leave the overlay's **position and background at Figma's defaults**;
+don't try to place or style them.
+
+**Why leave them default:** `overlayPositionType` and `overlayBackground` are
+**read-only** via Figma's Plugin API (not an MCP gap — Figma itself exposes no
+setter), so they can only be set by hand in the Figma UI. Do **not** work around
+this by wrapping the overlay in a full-viewport transparent frame with the modal
+nested inside. That makes the *generated* prototype look right, but it points the
+prototype link at the wrapper instead of the real dialog — so any human who later
+re-prototypes has to dig in and re-link to the nested frame. Ship the
+default-positioned overlay instead and flag it: setting position (e.g. drawer
+pinned RIGHT) and scrim is a few seconds of UI work for a human, and the link
+already points at the real dialog. Optimize for the handoff, not the first render.
+(A non-blocking banner, like cookie consent, can be scrim-less.)
+
+**Flag each overlay for the human.** Because position and scrim are left default,
+leave a checklist so none ship un-styled: drop a short text note in the `Overlays`
+canvas section — one line per overlay, `frame name → intended position + scrim`
+(e.g. *Mini-cart → pin RIGHT, dim scrim*; *Cookie banner → bottom, no scrim*) —
+and repeat that same list in the build-state record and the end-of-build summary.
+That list is the checklist a human works through in the Figma UI.
 
 ## Button standardization
 
@@ -71,8 +88,9 @@ onclick:
   should inherit header/footer/card navigation for free.
 - After a session, **record the build state** (project notes or persistent
   memory): the file key, key component node IDs, what screens exist, the naming
-  and section layout, and any DS-specific tagging convention. The next session
-  should be able to find and instance the header without re-reading the file.
+  and section layout, and any DS-specific tagging convention, plus any overlays still
+  at default position/scrim awaiting manual setup. The next session should be able
+  to find and instance the header without re-reading the file.
 - Organize the canvas into **labeled sections** (e.g. "Components", "Primary
   flow", "Account", "Overlays") and set named `flowStartingPoints` so the
   prototype opens on the right entry points.
