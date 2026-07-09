@@ -1,0 +1,22 @@
+[
+  {"query": "specs are done — build the home, category and product pages in our figma file, using the design system already there", "should_trigger": true},
+  {"query": "add the account screens (dashboard, orders, subscriptions) to the figma file and wire them into the prototype", "should_trigger": true},
+  {"query": "i need a clickable prototype of the checkout flow in figma, built from the specs in docs/layouts", "should_trigger": true},
+  {"query": "lay out the PDP wireframe in figma, make the product card a component since it repeats, and hook up add-to-cart", "should_trigger": true},
+  {"query": "build the rest of the screens from the sitemap in figma — repeated stuff must be components and it should all click through", "should_trigger": true},
+  {"query": "the design system is already in the file. assemble the find-your-filter flow as frames and connect the steps", "should_trigger": true},
+  {"query": "extend our figma prototype with the B2B portal screens, reusing the existing header and footer components", "should_trigger": true},
+  {"query": "turn these wireframe specs into figma frames with lithuanian copy and wire the navigation", "should_trigger": true},
+  {"query": "prototype the subscription builder in figma using our components and connect it to the cart", "should_trigger": true},
+  {"query": "make the mobile home screen in figma and link it into the desktop flow", "should_trigger": true},
+  {"query": "design a new brand color palette and pick fonts in figma", "should_trigger": false},
+  {"query": "export our figma design to react + tailwind components", "should_trigger": false},
+  {"query": "read our figma file and list every component and its variants", "should_trigger": false},
+  {"query": "make a user-journey flowchart in figjam", "should_trigger": false},
+  {"query": "synthesize the client's notes and sitemap into project docs before we design", "should_trigger": false},
+  {"query": "change the primary button from green to blue across the whole figma file", "should_trigger": false},
+  {"query": "build the checkout page in next.js with stripe", "should_trigger": false},
+  {"query": "we have nothing yet — set up a component library and design tokens from scratch in figma", "should_trigger": false},
+  {"query": "write the requirements list and per-screen specs for the redesign", "should_trigger": false},
+  {"query": "put together a figma slides deck pitching the redesign to the client", "should_trigger": false}
+]

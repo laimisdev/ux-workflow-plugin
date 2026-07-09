@@ -1,0 +1,22 @@
+[
+  {"query": "we just landed a redesign gig for a filter shop. i've got the live url, a sitemap exported from octopus, and 3 pages of messy workshop notes. can you pull it all into proper project docs before we start designing?", "should_trigger": true},
+  {"query": "everything i know about this project is scattered across slack, a figjam, and my head — synthesize it into a brief, a requirements list, and screen specs", "should_trigger": true},
+  {"query": "kicking off the klimtera.lt rebuild — analyze the current site and organize the IA, requirements and content into markdown for the team", "should_trigger": true},
+  {"query": "turn this workshop transcript + rough page list into numbered requirements (with the reasoning) and per-screen layout specs", "should_trigger": true},
+  {"query": "before anyone opens figma i want one source of truth for the sitemap and a copy deck. inputs are the old site and a brief in a google doc", "should_trigger": true},
+  {"query": "onboard a freelancer to this ecommerce project fast — write up the brief, agreed sitemap and layout specs from what i give you", "should_trigger": true},
+  {"query": "i have a client brief, the existing website, and some requirement notes. structure all this into the standard project documentation", "should_trigger": true},
+  {"query": "we ran a discovery workshop and got ~15 requirements plus an IA. write them up properly and draft specs for each screen", "should_trigger": true},
+  {"query": "make sense of these inputs for the recuperator store redesign and set up the docs folder: brief, sitemap, requirements, specs, copy deck", "should_trigger": true},
+  {"query": "help me structure the project context for a new saas dashboard i'm redesigning; i'll paste the current nav, a feature list and stakeholder notes", "should_trigger": true},
+  {"query": "build the home and product pages in our figma file with the design system that's already in there", "should_trigger": false},
+  {"query": "set up a fresh next.js + typescript + tailwind project for this store", "should_trigger": false},
+  {"query": "summarize this one requirements pdf into 5 bullets for the standup", "should_trigger": false},
+  {"query": "create a sitemap diagram in figjam to present the IA to the client", "should_trigger": false},
+  {"query": "write the homepage hero and about page marketing copy", "should_trigger": false},
+  {"query": "wire up the prototype flows in figma so it clicks through like a real site", "should_trigger": false},
+  {"query": "organize my downloads and desktop folders, they're a disaster", "should_trigger": false},
+  {"query": "review my existing PRD and tell me what's missing", "should_trigger": false},
+  {"query": "do a competitive teardown of 5 baltic ventilation-filter shops", "should_trigger": false},
+  {"query": "write jira user stories and acceptance criteria for the checkout epic", "should_trigger": false}
+]
