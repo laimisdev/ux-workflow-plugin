@@ -41,12 +41,17 @@ claude plugin install ux-workflow@rimti
 ```
 
 To enable it automatically for everyone in a given project, add to that project's
-`.claude/settings.json`:
+`.claude/settings.json`. Include `"autoUpdate": true` so pushes are picked up at
+startup — without it a third-party marketplace is never refreshed automatically
+(see [Updating](#updating)):
 
 ```json
 {
   "extraKnownMarketplaces": {
-    "rimti": { "source": { "source": "github", "repo": "laimisdev/ux-workflow-plugin" } }
+    "rimti": {
+      "source": { "source": "github", "repo": "laimisdev/ux-workflow-plugin" },
+      "autoUpdate": true
+    }
   },
   "enabledPlugins": { "ux-workflow@rimti": true }
 }
@@ -74,12 +79,21 @@ default instead of relying on each teammate to set it up.
 
 ## Updating
 
-No version is pinned, so **every push to this repo is treated as the latest
-release** — improve a skill, push, and teammates pick it up. To refresh:
+No version is pinned, so **every push to this repo becomes the latest release** —
+but a push doesn't reach anyone on its own. Third-party marketplaces like `rimti`
+**don't auto-update by default** (only official Anthropic marketplaces do), so each
+teammate's Claude Code picks up a change only when its marketplace is refreshed.
+Two ways to get there:
 
-```
-/plugin marketplace update rimti
-```
+- **Refresh manually:** run `/plugin marketplace update rimti`, then
+  `/reload-plugins` (or restart Claude Code) to activate the new version.
+- **Turn on auto-update once:** `/plugin` → **Marketplaces** → `rimti` → **Enable
+  auto-update**, or set `"autoUpdate": true` on the `rimti` entry in project
+  settings (as above). Claude Code then refreshes at startup and prompts a reload
+  when something changed.
+
+If a change still doesn't appear after refreshing, clear the plugin cache with
+`rm -rf ~/.claude/plugins/cache`, restart Claude Code, and reinstall.
 
 ## Layout
 
