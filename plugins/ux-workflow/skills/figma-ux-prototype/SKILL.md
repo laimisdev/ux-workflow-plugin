@@ -47,8 +47,8 @@ file, so set this up **first**:
   the file link with a web fetch, and do **not** proceed as if the file can't be
   seen — Claude only "sees" the file through the MCP. (A file link alone is not
   access; you must read it via the MCP.) The MCP ships in Figma's official
-  `figma@claude-plugins-official` plugin, which this plugin auto-installs as a
-  dependency — so it's normally present; the user just authenticates it once via
+  `figma@claude-plugins-official` plugin — install it if it's missing
+  (`/plugin install figma@claude-plugins-official`) and authenticate once via
   `/mcp`.
 - **Load `/figma-use` before any `use_figma` call** (mandatory), and use
   `/figma-generate-design` when translating a spec/layout into Figma. This skill

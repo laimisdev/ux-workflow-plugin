@@ -4,7 +4,6 @@
     "name": "Laimonas",
     "email": "laimonas@rimti.lt"
   },
-  "allowCrossMarketplaceDependenciesOn": ["claude-plugins-official"],
   "plugins": [
     {
       "name": "ux-workflow",
