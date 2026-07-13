@@ -36,18 +36,33 @@ what makes the next person's work harder.
 
 ## Before you build
 
-1. **Get the target Figma file link** and confirm it. Never guess the file.
-2. **Confirm a design system already exists in the file.** This skill assumes it
-   does — components, tokens, styles. If the file has no DS, stop and raise it;
+**This skill operates on the Figma file entirely through the Figma MCP.** Every
+read and write — opening the file, inspecting the design system, creating frames,
+wiring the prototype — goes through the Figma MCP's skills and tools (`/figma-use`,
+`/figma-generate-design`, `use_figma`). There is no other way to see or change the
+file, so set this up **first**:
+
+- **Confirm the Figma MCP is connected, and use it.** If its tools aren't
+  available, stop and ask the user to enable the Figma MCP. Do **not** try to open
+  the file link with a web fetch, and do **not** proceed as if the file can't be
+  seen — Claude only "sees" the file through the MCP. (A file link alone is not
+  access; you must read it via the MCP.)
+- **Load `/figma-use` before any `use_figma` call** (mandatory), and use
+  `/figma-generate-design` when translating a spec/layout into Figma. This skill
+  governs *what* and *how* to build; those govern the mechanics.
+
+Then:
+
+1. **Get the target Figma file link, confirm it, and open it through the Figma
+   MCP** so you actually load its contents. Never guess the file, and never assume
+   what's in it without reading it via the MCP.
+2. **Confirm a design system already exists in the file** — read it through the
+   MCP: components, tokens, styles. If the file has no DS, stop and raise it;
    building UX on an empty file is a different task.
 3. **Have the specs in hand.** Ideally the doc set from the `project-intake`
    skill: the **sitemap** (the screen list + build order), the **layout specs**
    (per-screen structure), and the **copy deck** (the strings). If they don't
    exist yet, get at least a sitemap before building.
-4. **Load the Figma MCP skills.** `/figma-use` is **mandatory before any
-   `use_figma` call**; use `/figma-generate-design` for translating a spec/layout
-   into Figma. This skill governs *what* and *how* to build; those govern the
-   mechanics.
 
 ## The four house rules
 
