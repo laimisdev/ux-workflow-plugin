@@ -5,5 +5,8 @@
     "name": "Laimonas",
     "email": "laimonas@rimti.lt"
   },
-  "keywords": ["ux", "figma", "design", "workflow", "prototype", "intake"]
+  "keywords": ["ux", "figma", "design", "workflow", "prototype", "intake"],
+  "dependencies": [
+    { "name": "figma", "marketplace": "claude-plugins-official" }
+  ]
 }

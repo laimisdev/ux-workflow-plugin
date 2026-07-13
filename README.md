@@ -52,6 +52,26 @@ To enable it automatically for everyone in a given project, add to that project'
 }
 ```
 
+## Figma MCP (auto-installed)
+
+The `figma-ux-prototype` skill builds in Figma through Figma's **official MCP
+server**, which ships in the `figma@claude-plugins-official` plugin. This plugin
+**declares that as a dependency**, so installing `ux-workflow` pulls in the Figma
+plugin automatically — Claude Code lists it at the end of the install output. This
+is what fixes the "Claude can't see the Figma file" symptom: the MCP is present by
+default instead of relying on each teammate to set it up.
+
+- `claude-plugins-official` is Anthropic's built-in marketplace (available out of
+  the box), so there's nothing extra to add. The dependency is allowed
+  cross-marketplace via `allowCrossMarketplaceDependenciesOn` in
+  `marketplace.json`.
+- **Authenticate once:** on first use, connect the Figma MCP via OAuth — run
+  `/mcp` and approve in the browser. Until it's connected, `figma-ux-prototype`
+  cannot read a Figma file.
+- Needs a reasonably recent Claude Code (plugin-dependency support; v2.1.143+
+  recommended). Locked-down orgs that block `claude-plugins-official` would need
+  to allow it, or install the `figma` plugin manually.
+
 ## Updating
 
 No version is pinned, so **every push to this repo is treated as the latest
