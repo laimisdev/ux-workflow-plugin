@@ -1,0 +1,20 @@
+name: Validate plugin
+
+# Runs on every push/PR to the dev trunk and the release channel, so a broken
+# manifest is caught before it can be promoted to `stable` and reach teammates.
+on:
+  push:
+    branches: [main, stable]
+  pull_request:
+    branches: [main, stable]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate plugin manifests
+        run: python3 scripts/validate-plugin.py
