@@ -1,7 +1,9 @@
 name: Validate plugin
 
-# Runs on every push/PR to the dev trunk and the release channel, so a broken
-# manifest is caught before it can be promoted to `stable` and reach teammates.
+# Validate on every push/PR to the dev trunk and the release channel. On a
+# successful push to main, auto-advance `stable` (the branch teammates track) so a
+# single `git push origin main` ships to everyone — but only if the manifest check
+# passes, so a broken manifest can never reach the team.
 on:
   push:
     branches: [main, stable]
@@ -18,3 +20,18 @@ jobs:
           python-version: "3.12"
       - name: Validate plugin manifests
         run: python3 scripts/validate-plugin.py
+
+  promote:
+    # Only after validation passes, and only for a push to main — fast-forward the
+    # stable release channel so teammates pick it up on their next startup.
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fast-forward stable to main
+        run: git push origin HEAD:stable

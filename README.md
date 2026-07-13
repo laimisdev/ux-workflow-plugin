@@ -92,34 +92,35 @@ the work, and both matter:
   commit on its branch; Claude Code then prompts `/reload-plugins` to activate it.
   This is what stops teammates silently sitting on a stale cached build.
 - **`"ref": "stable"`** — the marketplace tracks the `stable` branch, not `main`.
-  You develop on `main`; a change reaches the team only when you *promote* it to
-  `stable`. So a broken commit can't take everyone down the moment it's pushed —
-  which is exactly the failure this channel exists to prevent.
+  You push to `main`; CI validates the manifests and only then fast-forwards
+  `stable`, so a manifest-breaking commit can't reach the team the moment it's
+  pushed — which is exactly the failure this channel exists to prevent.
 
 Updates run at startup only, so a teammate mid-session picks up a new release on
 their next restart (or after the `/reload-plugins` prompt).
 
 ### Releasing a change (maintainers)
 
+Just push to `main` — that's the whole release. CI validates the manifests and, if
+they pass, automatically fast-forwards `stable` (the branch teammates track), who
+then auto-update on their next startup. If validation fails, `stable` is left
+untouched, so a broken manifest never reaches anyone — you just fix and push again.
+
 ```bash
-# 1. develop on main
-git push origin main
-
-# 2. sanity-check the manifests before shipping (same check CI runs)
-python3 scripts/validate-plugin.py
-
-# 3. smoke-test locally: refresh your own install off main and confirm BOTH skills load
-#    /plugin marketplace update rimti && /plugin update ux-workflow@rimti && /reload-plugins
-
-# 4. promote → the team picks it up on their next startup
-git push origin main:stable
+git push origin main                 # ship it; CI promotes to stable on green
+python3 scripts/validate-plugin.py   # optional: run the same check locally first
 ```
 
 Keep **no `version` field** in `plugins/ux-workflow/.claude-plugin/plugin.json`.
-With it absent, the commit SHA drives updates and every promote is seen as new. If
-you ever add a `version`, you must bump it on *every* release — otherwise Claude
-Code sees an unchanged version string and keeps the stale cached copy for everyone.
-(CI warns if a `version` field appears.)
+With it absent, the commit SHA drives updates and every push is seen as new. If you
+ever add a `version`, you must bump it on *every* release — otherwise Claude Code
+sees an unchanged version string and keeps the stale cached copy for everyone. (CI
+warns if a `version` field appears.)
+
+> **One-time repo setting:** auto-promotion needs Actions to be allowed to push. In
+> GitHub → **Settings → Actions → General → Workflow permissions**, select **Read
+> and write permissions**. Without it the `promote` job can't advance `stable`, and
+> you'd fall back to promoting by hand (`git push origin main:stable`).
 
 ### When something still looks stale
 
