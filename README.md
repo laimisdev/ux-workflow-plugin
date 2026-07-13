@@ -40,22 +40,28 @@ claude plugin marketplace add laimisdev/ux-workflow-plugin
 claude plugin install ux-workflow@rimti
 ```
 
-To enable it automatically for everyone in a given project, add to that project's
-`.claude/settings.json`. Include `"autoUpdate": true` so pushes are picked up at
-startup — without it a third-party marketplace is never refreshed automatically
-(see [Updating](#updating)):
+To enable it automatically for everyone working in a given project, commit a
+`.claude/settings.json` to **that project's** repo (not this one). Pointing the
+`ref` at the `stable` branch and setting `"autoUpdate": true` is what keeps the
+whole team on the latest *validated* build without anyone running update commands
+by hand (see [Updating](#updating) for why both matter):
 
 ```json
 {
   "extraKnownMarketplaces": {
     "rimti": {
-      "source": { "source": "github", "repo": "laimisdev/ux-workflow-plugin" },
+      "source": { "source": "github", "repo": "laimisdev/ux-workflow-plugin", "ref": "stable" },
       "autoUpdate": true
     }
   },
   "enabledPlugins": { "ux-workflow@rimti": true }
 }
 ```
+
+Because the plugin source is remote, committed settings aren't quite zero-touch on
+first run: each teammate, once, trusts the repo folder when prompted and runs
+`/plugin install ux-workflow@rimti`. After that, `autoUpdate` carries them — no
+more manual installs or refreshes.
 
 ## Figma MCP (required for the build phase)
 
@@ -73,27 +79,78 @@ not access. (The `project-intake` skill needs none of this; it has no Figma step
 
 ## Updating
 
-No version is pinned, so **every push to this repo becomes the latest release** —
-but a push doesn't reach anyone on its own. Third-party marketplaces like `rimti`
-**don't auto-update by default** (only official Anthropic marketplaces do), so each
-teammate's Claude Code picks up a change only when its marketplace is refreshed.
-Two ways to get there:
+### How updates reach the team
 
-- **Refresh manually:** run `/plugin marketplace update rimti`, then
-  `/reload-plugins` (or restart Claude Code) to activate the new version.
-- **Turn on auto-update once:** `/plugin` → **Marketplaces** → `rimti` → **Enable
-  auto-update**, or set `"autoUpdate": true` on the `rimti` entry in project
-  settings (as above). Claude Code then refreshes at startup and prompts a reload
-  when something changed.
+Versions aren't pinned by a `version` field, so Claude Code identifies each release
+by its **git commit SHA** — every commit on the tracked branch is a new version.
+But a push doesn't reach anyone on its own: third-party marketplaces like `rimti`
+**don't auto-update by default** (only official Anthropic ones do). Two settings do
+the work, and both matter:
 
-If a change still doesn't appear after refreshing, clear the plugin cache with
-`rm -rf ~/.claude/plugins/cache`, restart Claude Code, and reinstall.
+- **`"autoUpdate": true`** — at each Claude Code **startup**, the `rimti`
+  marketplace is refreshed and the installed plugin is advanced to the newest
+  commit on its branch; Claude Code then prompts `/reload-plugins` to activate it.
+  This is what stops teammates silently sitting on a stale cached build.
+- **`"ref": "stable"`** — the marketplace tracks the `stable` branch, not `main`.
+  You develop on `main`; a change reaches the team only when you *promote* it to
+  `stable`. So a broken commit can't take everyone down the moment it's pushed —
+  which is exactly the failure this channel exists to prevent.
+
+Updates run at startup only, so a teammate mid-session picks up a new release on
+their next restart (or after the `/reload-plugins` prompt).
+
+### Releasing a change (maintainers)
+
+```bash
+# 1. develop on main
+git push origin main
+
+# 2. sanity-check the manifests before shipping (same check CI runs)
+python3 scripts/validate-plugin.py
+
+# 3. smoke-test locally: refresh your own install off main and confirm BOTH skills load
+#    /plugin marketplace update rimti && /plugin update ux-workflow@rimti && /reload-plugins
+
+# 4. promote → the team picks it up on their next startup
+git push origin main:stable
+```
+
+Keep **no `version` field** in `plugins/ux-workflow/.claude-plugin/plugin.json`.
+With it absent, the commit SHA drives updates and every promote is seen as new. If
+you ever add a `version`, you must bump it on *every* release — otherwise Claude
+Code sees an unchanged version string and keeps the stale cached copy for everyone.
+(CI warns if a `version` field appears.)
+
+### When something still looks stale
+
+If a teammate isn't on the version you expect after a promote + restart:
+
+```bash
+/plugin marketplace update rimti   # force-refresh the marketplace
+/plugin update ux-workflow@rimti   # advance the install
+/reload-plugins                    # activate in the current session
+```
+
+If it's genuinely stuck, clear the cache (there's no official command for this —
+it's a workaround) and let it reinstall:
+
+```bash
+rm -rf ~/.claude/plugins/cache/rimti/ux-workflow
+```
+
+### Desktop app note
+
+The Claude desktop app runs plugins in **local and SSH sessions only — not cloud
+sessions**. Behaviour is otherwise identical to the CLI. If a teammate uses a cloud
+session in the desktop app, the plugin won't be present there.
 
 ## Layout
 
 ```
 ux-workflow-plugin/                     ← git repo = marketplace
 ├── .claude-plugin/marketplace.json     ← lists the plugin(s)
+├── .github/workflows/validate.yml      ← CI: validates the manifests on push/PR
+├── scripts/validate-plugin.py          ← the same check, runnable locally
 ├── plugins/
 │   └── ux-workflow/
 │       ├── .claude-plugin/plugin.json
