@@ -56,9 +56,19 @@ supplementary.
   navigable and how the next session finds your work.
 - Compose from DS components/tokens/styles only. Missing piece? Note it as an open
   question — don't invent a style (visual design is a later phase).
+- **Search the DS by intent, not by name, before creating any component.** The
+  file's name for a thing rarely matches yours ("tabs" → `Segmented Control`,
+  "link" → `Button` `Link` variant), so a name-only look comes up empty and tempts
+  you to build your own. Use `search_design_system` by *purpose* and check the
+  inventory. Reuse the match, or flag the gap — see the reuse gate in
+  `house-rules.md`.
 
 ## Verify
 
 After building, click through the main flows and take a screenshot
 (`get_screenshot`) to confirm: instances are instances (not detached), components
-are consistent, links work, and nothing got wiped by an over-broad query.
+are consistent, links work, and nothing got wiped by an over-broad query. Also
+**sweep for invented components** — any locally-created component or raw element
+that duplicates something in the inventory (hand-built tabs, bare-text links,
+custom accordions) gets swapped back to the DS instance; anything with no DS match
+goes on the open-questions list, not into the file.

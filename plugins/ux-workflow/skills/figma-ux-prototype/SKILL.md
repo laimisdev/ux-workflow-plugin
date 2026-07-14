@@ -59,9 +59,18 @@ Then:
 1. **Get the target Figma file link, confirm it, and open it through the Figma
    MCP** so you actually load its contents. Never guess the file, and never assume
    what's in it without reading it via the MCP.
-2. **Confirm a design system already exists in the file** — read it through the
-   MCP: components, tokens, styles. If the file has no DS, stop and raise it;
-   building UX on an empty file is a different task.
+2. **Take a component inventory — the single most important step for avoiding
+   invented components.** Don't just glance at the DS; enumerate it. Use the MCP
+   (`get_metadata`, `search_design_system`, `get_libraries`) to list every
+   component the file offers, and write it down: for each, `name → what it's for →
+   key variants`, plus the tokens and styles. This written inventory is what you
+   compose *from* and what you check *against* before creating anything (see the
+   reuse gate in `house-rules.md`), and you record it in the build-state so the
+   next session reuses it instead of re-deriving it. If a DS is large, still list
+   what you can and search by intent for the rest — the goal is that "does the DS
+   already have this?" is always answered from a list, never from a guess. If the
+   file has no DS, stop and raise it; building UX on an empty file is a different
+   task.
 3. **Have the specs in hand.** Ideally the doc set from the `project-intake`
    skill: the **sitemap** (the screen list + build order), the **layout specs**
    (per-screen structure), and the **copy deck** (the strings). If they don't
@@ -71,8 +80,13 @@ Then:
 
 1. **Design system in the file only.** Compose screens from the existing DS
    components/tokens/styles. Do **not** introduce new colors, type, or spacing —
-   visual design is a later phase and the DS owns the look. If something's missing
-   from the DS, note it as an open question rather than inventing a style.
+   visual design is a later phase and the DS owns the look. **This applies to
+   components as much as styles:** never build your own tabs, link, accordion, or
+   chip when the DS has one — search the DS by what the element *does* (its name
+   there may differ), instance the match, or flag the gap. Creating a new
+   component is the exception that must be justified, not the default. If
+   something's missing from the DS, note it as an open question rather than
+   inventing it (see the reuse gate in `house-rules.md`).
 
 2. **Componentize everything repeated.** Any element that appears more than once —
    header, footer, product card, list row, review card, stat tile, step item —
@@ -111,7 +125,12 @@ Then:
    vs guest, made-to-order vs in-stock, etc.) as component variants, not one-off
    frames, wherever they repeat.
 6. **Verify** by clicking through the main flows and checking a screenshot; confirm
-   instances (not detached copies), consistent components, and working links.
+   instances (not detached copies), consistent components, and working links. Then
+   **sweep for invented components**: scan the screens for any locally-created
+   component or raw element that duplicates something in the inventory (a
+   hand-built tab bar, a bare-text link, a custom accordion), and swap each back
+   to the DS instance. Anything with genuinely no DS match goes on the open-questions
+   list, not into the file.
 
 ## Build in the project's target language
 

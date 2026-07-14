@@ -4,6 +4,45 @@ These expand the four rules in SKILL.md. They exist so that a file built by many
 people, over many sessions, stays coherent and maintainable — and so future
 sessions **extend** rather than rebuild.
 
+## Never invent a component — search the DS first
+
+The most common way a build goes wrong: the agent needs a UI element (tabs, a
+link, an accordion), doesn't see an obvious match, and quietly builds its own.
+That one detached, off-system component is exactly what these rules exist to
+prevent. So treat **creating a new component as the exception that must be
+justified**, never the default.
+
+**The gate — run it before you create anything repeated or clickable:**
+
+1. **Search the DS by what the element *does*, not by what you'd call it.** The DS
+   often names things differently: "tabs" might be `Segmented Control`, a "link"
+   might be a `Button` `Link` variant. Use `search_design_system` with the
+   element's *purpose* and cross-check the inventory you took (see SKILL.md step 2).
+2. **Match found → instance it.** A rough match beats a new component. If you need
+   a state the component lacks, that's a *variant request on the existing
+   component*, not grounds for a new one.
+3. **Genuinely no match → flag it as an open question and stop.** A missing DS
+   component is a gap for the design-system owner — record it in the build-state
+   and the end-of-build summary. Do **not** paper over it by inventing one.
+
+**Common UI pattern → DS component to reach for** (generalizes button
+standardization below; always search the DS for the file's *actual* name):
+
+| You need… | Reach for the DS… | Never… |
+|---|---|---|
+| Filled / outline / ghost CTA | `Button` | build a bare frame with an onclick |
+| Icon-only tap target | `Icon Button` | drop a raw icon with a reaction |
+| "See all" / standalone action link | `Button` `Link` variant | style text blue by hand |
+| Footer / nav / inline-sentence anchor | text link | make it a Button |
+| Tabs / segmented switcher | `Tabs` / `Segmented Control` | hand-build tab headers |
+| Expand/collapse section | `Accordion` / `Disclosure` | build a custom toggle row |
+| Removable filter / selection tag | `Chip` / `Tag` | style a pill by hand |
+| Trail like Home / Shop / PDP | `Breadcrumbs` | lay out text with "/" separators |
+| Inline notice / status message | `Banner` / `Alert` / `Callout` | build a colored box by hand |
+
+If the DS genuinely lacks one of these, that's the **flag-it** path — not the
+build-it path.
+
 ## Component & instance discipline
 
 - **Every repeated element is a component; every occurrence is an instance.**
@@ -79,22 +118,22 @@ That list is the checklist a human works through in the Figma UI.
 ## Button standardization
 
 Everything clickable maps to a DS component — no raw icons or bare text with an
-onclick:
-- Filled / outline / ghost CTA → **Button**.
-- Icon-only tap target → **Icon Button**.
-- Standalone "see all" / action link → **Button** `Link` variant.
-- Footer column links, nav items, inline-sentence anchors → **text links**
-  (this is correct convention — they are not buttons).
+onclick. The mapping lives in the *Common UI pattern → DS component* table above
+(the button/icon-button/link rows). The one convention worth restating: footer
+column links, nav items, and inline-sentence anchors are **text links**, not
+Buttons — that's correct, they are not buttons.
 
 ## Extend, don't rebuild — and record the state
 
 - Before building anything, check what exists and **instance it**. A new screen
   should inherit header/footer/card navigation for free.
 - After a session, **record the build state** (project notes or persistent
-  memory): the file key, key component node IDs, what screens exist, the naming
-  and section layout, and any DS-specific tagging convention, plus any overlays still
-  at default position/scrim awaiting manual setup. The next session should be able
-  to find and instance the header without re-reading the file.
+  memory): the **component inventory** (name → purpose → key variants) so the next
+  session reuses it instead of re-deriving it and re-risking invented components,
+  the file key, key component node IDs, what screens exist, the naming and section
+  layout, and any DS-specific tagging convention, plus any overlays still at
+  default position/scrim awaiting manual setup. The next session should be able to
+  find and instance the header without re-reading the file.
 - Organize the canvas into **labeled sections** (e.g. "Components", "Primary
   flow", "Account", "Overlays") and set named `flowStartingPoints` so the
   prototype opens on the right entry points.
