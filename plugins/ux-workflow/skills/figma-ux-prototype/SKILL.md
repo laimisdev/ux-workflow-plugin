@@ -112,6 +112,21 @@ Then:
    reusing the existing mains. Record what you built (see *Record the build
    state*) so the next session continues instead of starting over.
 
+## Design the complex flows with best practices
+
+The four rules keep the file coherent; this keeps it *good*. For the parts where
+UX quality makes or breaks the experience — **checkout, account, product detail,
+search/filtering, forms, sign-up/onboarding** — don't just transcribe the spec
+box-by-box. Ground the structure in the established best practices for that
+pattern, and **research current conventions when you're genuinely unsure** rather
+than guessing. Two boundaries hold: best practices shape IA, step/field order,
+states, and flow but stay **inside the DS-only rule** (they never justify new
+styling or an invented component); and they **don't silently add scope** — where a
+best practice isn't covered by the spec, apply the well-established pattern if it's
+clearly structural and **flag the deviation as an open question**. The per-pattern
+checklists (what "good" looks like for checkout, PDP, account, search, forms) live
+in [`references/house-rules.md`](references/house-rules.md).
+
 ## Process
 
 1. **Plan the screen list** from the sitemap, in the agreed build order
@@ -122,7 +137,9 @@ Then:
    (e.g. above the screens in negative-Y space, or a labeled components section),
    so prototype reactions wired on the mains are inherited by all instances.
 3. **Build each screen as a composition of instances**, following its layout spec
-   for structure/hierarchy/content/states. Use the copy deck for all text.
+   for structure/hierarchy/content/states. Use the copy deck for all text. For
+   high-stakes flows (checkout, PDP, account, search, forms), ground the structure
+   in best practices for that pattern first (see *Design the complex flows*).
 4. **Wire the prototype**: nav on mains (rule 3), screen-specific CTAs on instances,
    overlays via Figma's native overlay actions — wired to the natural-size frame,
    position/scrim left default and flagged for the human. Apply the agreed

@@ -160,6 +160,51 @@ Buttons — that's correct, they are not buttons.
   flow", "Account", "Overlays") and set named `flowStartingPoints` so the
   prototype opens on the right entry points.
 
+## Design the complex flows with best practices — and research when unsure
+
+The reuse and wiring rules keep the file coherent; this keeps it *good*. For the
+parts of a product where UX quality makes or breaks the experience, don't just
+transcribe the layout spec box-by-box — build on the established best practices for
+that pattern, and **research current conventions when you're genuinely unsure**
+rather than guessing.
+
+**Two hard boundaries:**
+
+- **Best practices inform structure and interaction, not styling.** They shape IA,
+  step/field order, states (empty/loading/error/success), affordances, and flow —
+  all within the DS-only rule. A best practice never justifies inventing a color, a
+  type ramp, or a component the DS lacks; a missing component is still the flag-it
+  path (see *Never invent a component*).
+- **Respect the spec; don't silently add scope.** Where a best practice isn't
+  covered by — or contradicts — the layout spec/sitemap, apply the well-established
+  pattern if it's clearly structural, but **flag the deviation or gap as an open
+  question** in the build-state and end-of-build summary. Don't invent features the
+  project didn't ask for.
+
+**The high-stakes patterns and what "good" looks like** (these are structural
+expectations — search the DS for the components that realize them):
+
+- **Checkout** — minimize steps; show a progress indicator; offer guest checkout;
+  ask for email early; keep a persistent order summary; validate inline; reveal all
+  costs (shipping, tax, fees) before the final step; make the primary action
+  unmistakable; end on an order-confirmation state.
+- **Product detail (PDP)** — image gallery; clear title, price, and availability;
+  prominent primary action (add-to-cart / buy); variant and quantity selection with
+  out-of-stock states; delivery/returns info; reviews/ratings; sticky primary action
+  on mobile.
+- **Account** — clear sections (profile, orders, addresses, payment, settings);
+  obvious sign-out; confirmation on destructive actions; empty states for
+  no-orders / no-addresses.
+- **Search & filtering** — visible query; applied filters as removable chips; result
+  count; sort control; and no-results, empty, and loading states.
+- **Forms** — logical grouping and order; inline validation with clear, recoverable
+  errors; forgiving input; sensible defaults; a clear success state.
+- **Sign-up / onboarding** — minimal required fields; value stated up front; progress
+  indication for multi-step; skip/deferral where reasonable.
+
+When a pattern isn't in this list but is clearly important or unfamiliar, treat it
+the same way: establish the best practice first (research if needed), then build.
+
 ## Show flows as progression
 
 When a flow has steps (a finder, a checkout), build the steps as **distinct
