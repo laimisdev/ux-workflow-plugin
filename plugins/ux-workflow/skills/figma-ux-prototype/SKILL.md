@@ -93,13 +93,19 @@ Then:
    is a **component**, and every occurrence is an **instance**. Never copy-paste a
    block. When you notice a second occurrence of something, promote it to a
    component and swap the occurrences to instances. This is what makes a
-   1,000-SKU-scale catalog maintainable from templates.
+   1,000-SKU-scale catalog maintainable from templates. **Don't rename the DS
+   instances you place** — a `Button` instance stays named `Button`, not
+   `btn-secondary`; name only the nodes you create (see *Keep the names of DS
+   instances* in `house-rules.md`).
 
 3. **Always wire a clickable prototype.** Screens connect into real flows. Wire
    navigation reactions on the **main components** (on the same page as the
    screens), so every instance inherits them — don't wire the same nav 50 times on
    50 instances. Screen-specific CTAs get wired at the instance level. The result
-   should click through like a real site.
+   should click through like a real site. **Anything clickable is also hoverable:**
+   if an element navigates or opens an overlay, it must have a hover affordance
+   too. DS components already carry one; authored clickables (cards, tiles, rows)
+   need a `Hover` variant added — see *Clickable ⇒ hoverable* in `house-rules.md`.
 
 4. **Extend, don't rebuild.** Before adding anything, check what already exists and
    instance it. New screens should get header/footer/card navigation "for free" by
@@ -120,17 +126,21 @@ Then:
 4. **Wire the prototype**: nav on mains (rule 3), screen-specific CTAs on instances,
    overlays via Figma's native overlay actions — wired to the natural-size frame,
    position/scrim left default and flagged for the human. Apply the agreed
-   transition rules.
+   transition rules. Ensure every clickable element has a hover affordance — add a
+   `Hover` variant to any authored clickable (cards, tiles, rows) that lacks one.
 5. **Add states and variants** the specs call for (empty/loading/error, logged-in
    vs guest, made-to-order vs in-stock, etc.) as component variants, not one-off
    frames, wherever they repeat.
 6. **Verify** by clicking through the main flows and checking a screenshot; confirm
-   instances (not detached copies), consistent components, and working links. Then
+   instances (not detached copies), consistent components, working links, and that
+   every clickable element has a hover affordance (no click-without-hover). Then
    **sweep for invented components**: scan the screens for any locally-created
    component or raw element that duplicates something in the inventory (a
    hand-built tab bar, a bare-text link, a custom accordion), and swap each back
    to the DS instance. Anything with genuinely no DS match goes on the open-questions
-   list, not into the file.
+   list, not into the file. In the same pass, **check DS instances kept their
+   names** — a `Button` renamed to `btn-secondary` is a red flag; restore the
+   inherited name and express the intent as a variant, not a rename.
 
 ## Build in the project's target language
 

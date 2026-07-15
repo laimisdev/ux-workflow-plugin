@@ -59,6 +59,17 @@ build-it path.
 - **Use variants for states**, not duplicate frames: `State=Empty/Saved/Due`,
   `User=Guest/LoggedIn`, `Delivery=Fast/MadeToOrder`, `Fit=Fits/None`. One
   component with variant axes beats ten near-identical frames.
+- **Keep the names of DS instances — only rename what you create.** When you place
+  an instance of a design-system component (a `Button`, an `Icon Button`, a
+  `Chip`), leave its layer name as inherited from the main. Do **not** rename a
+  `Button` instance to `btn-secondary`, `cta-primary`, or the like. A rename hides
+  that the node is a DS instance, breaks traceability back to the DS, and makes the
+  invented-component sweep unreliable — a renamed instance reads like a bespoke,
+  off-system element. If you want a "secondary" button, that's a **variant** of
+  `Button` (`Type=Secondary`), selected via variant props — never a rename. Reserve
+  meaningful names for nodes you actually author: new components you create
+  (`Product Row`), screen frames, and section/layout containers. **Rule of thumb:
+  did you create this node, or instance it? Created → name it. Instanced → leave it.**
 
 ## Prototype wiring
 
@@ -66,6 +77,17 @@ build-it path.
   logo→Home, cart→Cart, nav items→their pages get wired once on the header main
   and every screen inherits them. Screen-specific CTAs (hero→finder, add→cart) are
   wired at the instance level.
+- **Clickable ⇒ hoverable.** Anything that navigates or opens an overlay must also
+  have a hover affordance — it's how a user can tell the element is interactive and
+  what makes the prototype feel real. DS components (buttons, links, cards) already
+  carry an `ON_HOVER`, so preserve it (see the hover-merge rule below). But for
+  components you **author** — a custom card, tile, list row, or any bespoke
+  clickable — hover does **not** come for free: give the component a
+  `State=Default/Hover` variant with a subtle hover treatment (elevation, border,
+  or background shift, using DS tokens only) and wire `ON_HOVER → CHANGE_TO Hover`
+  (`SMART_ANIMATE`, per the transition rules) on the **main**, so every instance
+  inherits it. A card with an `ON_CLICK` but no hover is not finished — add the
+  hover before you consider it wired.
 - **Hover-merge rule (critical):** setting a reaction on a DS-derived instance
   *replaces* everything it inherited from its main — including the `ON_HOVER`
   state change that makes buttons feel alive. You only hit this on the components

@@ -71,4 +71,7 @@ are consistent, links work, and nothing got wiped by an over-broad query. Also
 **sweep for invented components** — any locally-created component or raw element
 that duplicates something in the inventory (hand-built tabs, bare-text links,
 custom accordions) gets swapped back to the DS instance; anything with no DS match
-goes on the open-questions list, not into the file.
+goes on the open-questions list, not into the file. In the same sweep, confirm
+**DS instances kept their inherited names** — a `Button` renamed to `btn-secondary`
+should be restored and expressed as a variant, not a rename (see the naming rule
+in `house-rules.md`).
