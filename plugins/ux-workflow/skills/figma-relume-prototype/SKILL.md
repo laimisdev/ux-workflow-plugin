@@ -4,11 +4,13 @@ description: >-
   Build or extend website/landing-page SCREENS in Figma by ASSEMBLING Relume
   library section blocks (Navbar, Header/hero, Layout/feature, CTA, testimonial,
   logo, stats, pricing, FAQ, contact, footer, …), under a fixed set of house
-  rules: assemble from the Relume sections already in the file (never hand-build
-  or restyle a section — this is the wireframe/structure phase), build each page
-  as a vertical stack of section instances chosen by JOB then by LAYOUT variant,
-  place the global Navbar/Footer once and reuse them, always wire a clickable
-  prototype (nav on the global sections, page CTAs on the instances), and extend
+  rules: compose from the Relume sections already in the file on a strict
+  preference ladder — REUSE a section that fits, EDIT/restyle one that's close, and
+  CREATE a new section only when nothing fits (always edit before you create) —
+  build each page as a vertical stack of section instances chosen by JOB then by
+  LAYOUT variant, place the global Navbar/Footer once and reuse them, always wire a
+  clickable prototype (nav on the global sections, page CTAs on the instances), and
+  extend
   rather than rebuild. Reach for it whenever the project builds on the Relume
   section library, or the user mentions Relume, or it's a marketing / landing /
   content website assembled from prebuilt sections — e.g. "build the landing page
@@ -21,10 +23,10 @@ description: >-
   instead. It complements the Figma MCP's /figma-use and /figma-generate-design
   skills (they do the Figma operations; this adds the Relume section-assembly
   process and house rules). It assumes the Relume library already exists in the
-  file, so do NOT use it for: visual or brand design like choosing colors/fonts
-  or restyling sections (a later phase); building a design system or component
-  library from scratch (use /figma-generate-library); converting a Figma design
-  INTO code (design-to-code); merely inspecting or reading an existing file;
+  file, so do NOT use it for: defining the brand's color palette or type system
+  from scratch (the upstream design-token work); building a design system or
+  component library from scratch (use /figma-generate-library); converting a Figma
+  design INTO code (design-to-code); merely inspecting or reading an existing file;
   FigJam diagrams; or Figma Slides decks.
 ---
 
@@ -35,15 +37,20 @@ description: >-
 Relume works differently from an atomic design system. You don't compose a page
 from buttons and inputs — you **assemble it from prebuilt section blocks** (a
 Navbar, a Header/hero, a stack of Layout/feature sections, a CTA, a Footer), each
-shipped in many numbered layout variants. Built well, a Relume file lets a whole
-team stand up coherent marketing pages fast; built carelessly — one hand-rolled
-hero here, a detached footer there — it rots into a pile of off-library one-offs
-that nobody can update. These house rules keep the assembly disciplined: the file
-speaks one visual language (Relume's, untouched — this is the wireframe phase),
-pages are stacks of reusable section instances, the prototype clicks through like
-a real site, and future sessions **extend** the file instead of rebuilding it.
-Follow them even when hand-building "just this one section" is faster — that
-shortcut is exactly what breaks the next person's work.
+shipped in many numbered layout variants. Relume is a **customizable starting
+kit**, not a locked catalogue — you may edit its sections, restyle them to the
+brand, and create new ones when the library genuinely lacks something. Built well,
+a Relume file lets a whole team stand up coherent marketing pages fast; built
+carelessly — a *needless* hand-rolled hero here, a detached footer there — it rots
+into a pile of off-library one-offs that nobody can update. So these house rules
+keep the work disciplined without making it rigid: **reuse** a section when one
+fits, **edit** a section when it's close, and **create** a new one only when
+nothing fits — and whatever you edit or create stays a proper reusable component.
+Pages stay stacks of section instances, the prototype clicks through like a real
+site, and future sessions **extend** the file instead of rebuilding it. The
+discipline isn't "never touch a section" — it's "don't create what you could have
+reused or edited," because that needless one-off is what breaks the next person's
+work.
 
 This is the section-library counterpart to `figma-ux-prototype`. Same spirit,
 different unit of composition: there you compose app UI from an in-file atomic DS
@@ -101,29 +108,36 @@ Then:
 
 ## The four house rules
 
-1. **Relume sections only — assemble, don't build or restyle.** Compose every
-   page from the Relume section blocks already in the file. **Never hand-build a
-   section** — a hero, a feature row, a pricing table, a footer — out of frames and
-   text; that off-library block is exactly what these rules exist to prevent. And
-   do **not** introduce new colors, type, or spacing: this is the
-   wireframe/structure phase and Relume owns the look (restyling to brand is a
-   later phase). If a section type you need genuinely isn't in the library, note it
-   as an open question rather than inventing it (see the selection gate in
-   `relume-principles.md`).
+1. **Reuse first, edit before you create.** Compose every page from the Relume
+   section blocks in the file, in that strict order of preference: **(a) reuse** a
+   section whose job and layout already fit; **(b) edit** an existing section — its
+   content, layout, or styling — when one is close but not quite right; **(c)
+   create** a new section only when nothing in the library can be reused or edited
+   to fit. Editing and restyling sections *is* allowed and expected — Relume is a
+   starting kit you shape. What's not allowed is **needlessly** hand-rolling a
+   one-off when a Relume section would have worked, or leaving detached scraps
+   behind. Whatever you edit or create stays a **proper reusable component** (edit
+   the main component, add a variant, or build a new component from the Relume
+   tokens — never a loose off-library frame). When both are viable, **prefer
+   editing an existing section over creating a new one** every time. See the full
+   section ladder in `relume-principles.md`.
 
-2. **A page is a stack of section instances — pick by JOB, then by LAYOUT; never
-   detach.** Build each page as a vertical auto-layout **stack of section
+2. **A page is a stack of section instances — pick by JOB, then by LAYOUT; edit,
+   don't detach.** Build each page as a vertical auto-layout **stack of section
    instances**. Select each one in two steps: (a) choose the section **category**
    by the section's *job* on the page (open the page? explain a feature? show
    proof? convert?), then (b) choose the specific Relume **variant** by which
    *layout* fits the content in the spec (image-left, centered, grid, alternating,
-   tabbed, …). Customize a section only through its instance — edit text, swap
-   image/logo/avatar slots, add or remove repeated items — **never by detaching**
-   (detaching severs the library link and breaks updates; to change layout, swap
-   the instance to a different Relume variant). Place the **global Navbar and
-   Footer once** and reuse those instances on every page. Don't rename the Relume
-   instances you place (a `Header 5` stays `Header 5`); name only containers you
-   author, like the page frames and canvas sections.
+   tabbed, …). Then match the edit to its scope: **one page's content** → instance
+   overrides (text, image/logo/avatar swaps, item count); **a different layout
+   among existing options** → swap the instance to another Relume variant; **layout
+   or styling you want everywhere** → edit the **main component** (it propagates to
+   every instance); **a repeating state** → add a **variant**. Reach for
+   **detaching only as a last resort** for a genuine one-off — it severs the library
+   link and should be rare; prefer a new component instead. Place the **global
+   Navbar and Footer once** and reuse those instances on every page. Don't rename
+   placed Relume instances (a `Header 5` stays `Header 5`); name the components and
+   containers you author or create.
 
 3. **Always wire a clickable prototype.** Pages connect into real flows. Wire
    navigation reactions on the **global Navbar and Footer mains** (on the pages'
@@ -148,9 +162,10 @@ sections** is what makes or breaks the page. Don't just transcribe the spec
 box-by-box — ground each page's section stack in the established pattern for that
 page type, and **research current conventions when you're genuinely unsure**
 rather than guessing. Two boundaries hold: best practices shape **section choice,
-order, content, and states** but stay **inside the Relume-only, no-restyle rule**
-(they never justify new styling or a hand-built section); and they **don't
-silently add scope** — where a best practice isn't covered by the spec, apply the
+order, content, and states**, and they follow the same ladder — they justify
+*reusing or editing* a section, not a **needless** new one, and any styling you add
+uses the Relume style-guide tokens, not invented values; and they **don't silently
+add scope** — where a best practice isn't covered by the spec, apply the
 well-established pattern if it's clearly structural and **flag the deviation as an
 open question**. The per-page-type section recipes (home/landing, product/feature,
 pricing, about, contact, blog) live in
@@ -169,8 +184,11 @@ pricing, about, contact, blog) live in
    spec for which sections and in what order. Ground the stack in the best-practice
    recipe for that page type first, then select each section by **job → variant by
    layout**, instance it into the page's vertical auto-layout frame, and fill
-   content from the copy deck (text, image/logo slots, item counts). Reuse the
-   global Navbar/Footer at top and bottom.
+   content from the copy deck (text, image/logo slots, item counts). Where a
+   section is close but not right, **edit it** (main component or variant) to fit;
+   where nothing fits, **create a new section as a component** — but only after
+   confirming reuse and editing won't do (the section ladder). Reuse the global
+   Navbar/Footer at top and bottom.
 4. **Wire the prototype**: nav on the Navbar/Footer mains (rule 3), page CTAs on
    the section instances, overlays (mobile nav menu, cookie banner) via Figma's
    native overlay actions — wired to the natural-size frame, position/scrim left
@@ -181,14 +199,15 @@ pricing, about, contact, blog) live in
    **built-in section variants**, not one-off duplicated frames, wherever they
    repeat.
 6. **Verify** by clicking through the flows and checking a screenshot; confirm
-   sections are **instances** (not detached), the same section variant is reused
-   consistently, links work, and every clickable has a hover affordance. Then
-   **sweep for hand-built sections**: scan the pages for any section assembled by
-   hand that duplicates a Relume section (a hand-rolled hero, a bespoke pricing
-   grid, a custom footer) and swap each back to the Relume instance. Anything with
-   genuinely no Relume match goes on the open-questions list, not into the file. In
-   the same pass, **confirm section instances kept their Relume names** (a `Layout
-   4` shouldn't be renamed `features-grid`).
+   sections are components/instances (not stray detached frames), the same section
+   is reused consistently, links work, and every clickable has a hover affordance.
+   Then **sweep for needless one-offs**: scan for any hand-built or detached section
+   that duplicates a Relume section a reuse or an edit would have covered, and fold
+   it back onto the library (reuse the instance, or turn it into a proper
+   component). A **new** section is fine when nothing fit — just confirm it's a real
+   reusable component bound to the Relume tokens, not a detached scrap, and note it
+   in the build-state. In the same pass, **confirm placed (unedited) Relume
+   instances kept their names** (a `Layout 4` shouldn't be renamed `features-grid`).
 
 ## Build in the project's target language
 
@@ -214,14 +233,14 @@ The rules above are the *what*. Two reference files hold the detail — read the
 before a substantial build:
 
 - [`references/relume-principles.md`](references/relume-principles.md) — the full
-  regulations: the section-selection gate (job → category → variant), the
-  page-need → Relume-category table, section-instance discipline (stack, swap
-  don't detach, global sections, keep Relume names), prototype wiring
-  (nav-on-globals, hover-merge, transition rules), the overlay pattern, the
-  per-page-type section recipes, and extend-don't-rebuild.
+  regulations: the section ladder (reuse → edit → create), the page-need →
+  Relume-category table, section-instance discipline (stack, edit don't detach,
+  global sections, keep Relume names), prototype wiring (nav-on-globals,
+  hover-merge, transition rules), the overlay pattern, the per-page-type section
+  recipes, and extend-don't-rebuild.
 - [`references/figma-gotchas.md`](references/figma-gotchas.md) — hard-won
   `use_figma` scripting gotchas (vertical page stacks and auto-layout sizing,
-  swapping section variants vs. variant properties, editing nested section content
-  without detaching, `appendChild` behavior, exact variant naming, the
-  hover-reaction merge, transition/overlay API limitations). These will save you
-  from subtle, silent breakage.
+  editing sections via instance overrides / main-component edits / variant swaps,
+  forking a new section component, `appendChild` behavior, exact variant naming,
+  the hover-reaction merge, transition/overlay API limitations). These will save
+  you from subtle, silent breakage.

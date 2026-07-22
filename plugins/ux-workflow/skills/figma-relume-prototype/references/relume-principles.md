@@ -6,39 +6,53 @@ and so future sessions **extend** rather than rebuild. The unit of composition
 here is the **section block**, not the atom: you assemble pages from Relume
 sections, you don't compose sections from primitives.
 
-## Never hand-build a section — search Relume first
+## Reuse first, edit before you create — the section ladder
 
-The most common way a Relume build goes wrong: the page needs a section (a hero, a
-feature explainer, a pricing table), the agent doesn't spot an exact match, and
-quietly builds its own out of frames and text. That one hand-rolled, off-library
-section is exactly what these rules exist to prevent — it won't match the type
-scale, won't update with the library, and reads as bespoke to the next person. So
-treat **hand-building a section as the exception that must be justified**, never
-the default.
+Relume is a **customizable starting kit, not a locked catalogue**: you may edit,
+restyle, and extend its sections, and create new ones when the library genuinely
+lacks something. What rots a file is not editing — it's a *needless* off-library
+one-off: a hand-rolled hero built when a Relume `Header` would have fit, or a
+detached scrap left behind that won't match the type scale or get library updates.
+So keep a strict order of preference and **stop at the first rung that works**.
 
-**The selection gate — run it before you place or build any section:**
+**The section ladder — run it before you place, edit, or build any section:**
 
-1. **Name the section's *job* on the page, then find the Relume *category* for
-   it.** Is it opening the page (→ Header), explaining a feature/benefit (→
-   Layout), showing proof (→ Logo / Testimonial / Stats), prompting an action (→
-   CTA)? Search the library by that purpose with `search_design_system`, and
-   cross-check the category map from your inventory (SKILL.md step 2) — Relume's
-   own name may differ from yours.
-2. **Then pick the *variant* by which layout fits the content.** Within the
-   category, Relume ships many numbered variants (`Layout 1…N`) differing by
-   arrangement — image-left/right, centered, two/three/four-column grid,
-   alternating rows, tabbed, carousel. Choose the one whose structure matches the
-   spec's content shape. A close layout you fill with the right copy beats a
-   hand-built section every time. If you need more/fewer items, that's an
-   instance-level content edit, not grounds for a new section.
-3. **Genuinely no match → flag it as an open question and stop.** A missing
-   section type is a gap for the library owner — record it in the build-state and
-   the end-of-build summary. Do **not** paper over it by hand-building one.
+1. **Reuse.** Name the section's *job* on the page, find the Relume *category* for
+   it, then pick the *variant* whose layout fits — and instance it. This is the
+   default and covers most sections.
+   - **Job → category:** opening the page (→ Header), explaining a feature/benefit
+     (→ Layout), showing proof (→ Logo / Testimonial / Stats), prompting an action
+     (→ CTA)? Search with `search_design_system` by that purpose and cross-check
+     the category map from your inventory (SKILL.md step 2) — Relume's names differ
+     from yours.
+   - **Category → variant:** within the category, Relume ships many numbered
+     variants (`Layout 1…N`) differing by arrangement — image-left/right, centered,
+     grid, alternating rows, tabbed, carousel. Pick the closest and fill it with
+     the spec's content. Needing more/fewer items is an instance-level content
+     edit, not grounds for anything new.
+2. **Edit.** If a section is *close but not right*, adapt it rather than starting
+   over. Change content through the instance; change layout or styling by **editing
+   the main component** (so every instance updates with it) or by **adding a
+   variant** for a repeating state. Editing and restyling are in scope — a
+   customized Relume section is still a first-class, reusable component.
+   **Prefer this over creating whenever an existing section can be bent to fit.**
+3. **Create — last resort.** Only when nothing can be reused or edited to fit,
+   create a new section, and make it a **proper reusable component**: full-width,
+   auto-layout, built from the Relume style-guide tokens (type scale, colors,
+   spacing) so it matches the file, and clearly named. The best starting point is
+   to **duplicate the nearest Relume section into a new component and rework it**,
+   not to build from a blank frame. Record any new section in the build-state and
+   flag it for the library owner — it may belong in the shared library.
+
+**Detaching an instance is not a rung on this ladder** — it produces an off-library
+scrap. Edit the main component or create a new component instead; detach only for a
+true one-off you accept won't be reusable.
 
 **Page need → Relume section category to reach for** (always search the library
-for the file's *actual* names and variant numbers):
+for the file's *actual* names and variant numbers — reuse the match, edit it to
+fit, or create only as a last resort):
 
-| The page needs… | Reach for the Relume category… | Never… |
+| The page needs… | Reach for the Relume category… | Don't hand-roll (reuse/edit instead)… |
 |---|---|---|
 | Top navigation bar | `Navbar` | build a nav row from frames |
 | Page opener / hero | `Header` | hand-build a hero |
@@ -54,8 +68,9 @@ for the file's *actual* names and variant numbers):
 | Article/resource list | `Blog` / `Content` | grid out cards by hand |
 | Site footer | `Footer` | build a footer from scratch |
 
-If the library genuinely lacks one of these, that's the **flag-it** path — not the
-build-it path.
+If the library genuinely lacks one of these, edit the nearest fit to cover it, or
+(last resort) create it as a proper component from the Relume tokens — and flag it
+for the library owner.
 
 ## Section-assembly & instance discipline
 
@@ -71,27 +86,28 @@ build-it path.
   wired on a main is inherited by every instance *on that page* — Figma ignores an
   inherited reaction that points to a frame on a **different** page, so keep the
   globals and the pages together.
-- **Swap the instance to change layout — never detach.** Detaching a section
-  severs its link to the Relume library, so it stops matching the type scale and
-  never receives library updates; it also defeats the hand-built-section sweep
-  (a detached section reads as bespoke). If a section's layout doesn't fit, **swap
-  the instance to a different Relume variant** — either a variant-property change or
-  a swap to a different Relume component, depending on how the library is
-  structured (see gotchas). Customize only content through the instance: edit text,
-  swap nested image/logo/avatar instances, add/remove repeated items via the
-  section's own controls.
+- **To change a section, edit — don't detach.** Match the tool to the scope:
+  **content** → instance overrides (text, nested image/logo/avatar swaps, item
+  count via the section's own controls); **a different layout among existing
+  options** → swap the instance to another Relume variant (a variant-property
+  change or a swap to a different Relume component, depending on how the library is
+  structured — see gotchas); **layout or styling that should apply everywhere** →
+  edit the **main component** (it propagates to every instance); **a new repeating
+  state** → add a **variant**. Detaching severs the library link — the section
+  stops matching the type scale and never receives updates — so reserve it for a
+  genuine one-off, and prefer a new component over a detached frame.
 - **Use Relume's built-in variants for states**, not duplicate frames: mobile /
   tablet section variants, `Navbar = LoggedOut/LoggedIn`, a list section's
   empty/populated states. One section instance switched by variant beats two
   near-identical hand-placed copies.
-- **Keep the names of Relume instances — only rename what you author.** A placed
-  `Header 5` instance stays named `Header 5`; a `Layout 4` stays `Layout 4`. Do
-  **not** rename them to `hero`, `features-grid`, or the like — a rename hides that
-  the node is a Relume instance, breaks traceability back to the library, and makes
-  the hand-built-section sweep unreliable. Reserve meaningful names for containers
-  you actually author: the page frames and the canvas/section groupings. **Rule of
-  thumb: did you create this node, or instance it? Created → name it. Instanced →
-  leave it.**
+- **Keep the names of placed Relume instances — name what you create.** A placed,
+  unedited `Header 5` instance stays named `Header 5`; a `Layout 4` stays `Layout
+  4`. Do **not** rename them to `hero`, `features-grid`, or the like — a rename
+  hides that the node is a Relume instance, breaks traceability back to the library,
+  and makes the needless-one-off sweep unreliable. Give clear names to what you
+  **create**: new components (and ones you fork/customize into your own component),
+  page frames, and canvas/section groupings. **Rule of thumb: placed as-is → leave
+  the name; created or forked into your own component → name it.**
 
 ## Prototype wiring
 
@@ -184,12 +200,13 @@ conventions when you're genuinely unsure** rather than guessing.
 
 **Two hard boundaries:**
 
-- **Best practices inform section choice, order, content, and states — not
-  styling.** They shape which sections, in what order, with what copy and what
-  states (empty/loading/error/success on any interactive section), all within the
-  Relume-only, no-restyle rule. A best practice never justifies inventing a color,
-  a type ramp, or a hand-built section; a missing section is still the flag-it path
-  (see *Never hand-build a section*).
+- **Best practices inform section choice, order, content, and states.** They shape
+  which sections, in what order, with what copy and what states
+  (empty/loading/error/success on any interactive section). They follow the same
+  ladder: a best practice justifies *reusing or editing* a section, not a
+  **needless** new one, and any styling it motivates uses the Relume style-guide
+  tokens, not invented values. A truly missing section is the *create-as-last-
+  resort* path (see *the section ladder*), done as a proper component.
 - **Respect the spec; don't silently add scope.** Where a best practice isn't
   covered by — or contradicts — the layout spec/sitemap, apply the well-established
   pattern if it's clearly structural, but **flag the deviation or gap as an open

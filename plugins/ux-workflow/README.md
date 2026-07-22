@@ -19,7 +19,9 @@ screens in Figma. Two build skills share the same house rules but differ in the
 **Which build skill?** Use `figma-relume-prototype` when the project builds on the
 Relume section library or is a marketing/content site; use `figma-ux-prototype`
 when composing app UI from an in-file atomic design system. Both assume the
-library/design-system already exists in the file (visual/brand styling is a later
-phase).
+library/design-system already exists in the file — you compose with it rather than
+building it from scratch. (`figma-ux-prototype` keeps styling to the DS as-is;
+`figma-relume-prototype` treats Relume as a customizable kit you may edit, restyle,
+and extend, preferring to edit existing sections over creating new ones.)
 
 See the [repo README](../../README.md) for install and update instructions.
