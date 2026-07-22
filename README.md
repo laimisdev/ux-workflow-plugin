@@ -1,22 +1,27 @@
 # ux-workflow — Claude Code plugin + marketplace
 
-A two-phase workflow for UX (re)design projects, packaged as a [Claude Code
+A workflow for UX (re)design projects, packaged as a [Claude Code
 plugin](https://code.claude.com/docs/en/plugins) so the whole team runs the same
 method on any machine. This repo is **both** the plugin and the marketplace that
 serves it.
 
 ## What's in it
 
-Two skills that fire automatically when your task matches, or that you can invoke
-explicitly:
+Three skills that fire automatically when your task matches, or that you can invoke
+explicitly. One synthesizes the inputs; two build the screens in Figma and differ
+by the **unit of composition** — pick by which library the project uses:
 
 | Skill | Phase | What it does |
 |---|---|---|
 | **`/ux-workflow:project-intake`** | 1 — synthesize | Turn scattered inputs (live site, sitemap, brief, workshop/stakeholder notes) into a structured, durable doc set: project brief, sitemap (source of truth), numbered requirements, per-screen layout specs, copy deck. |
-| **`/ux-workflow:figma-ux-prototype`** | 2 — build | Build the screens in Figma from those specs under fixed house rules: use only the design system already in the file, componentize everything, always wire a clickable prototype, extend don't rebuild. |
+| **`/ux-workflow:figma-ux-prototype`** | 2 — build (app UI) | Build **app / product UI** in Figma by composing an **in-file atomic design system** (e.g. shadcn), under fixed house rules: design-system-in-file only, componentize everything, always wire a clickable prototype, extend don't rebuild. |
+| **`/ux-workflow:figma-relume-prototype`** | 2 — build (marketing) | Build **marketing / landing / content pages** in Figma by **assembling Relume section blocks** (Navbar, Header/hero, Layout/feature, CTA, pricing, FAQ, footer…) chosen by job then layout variant, under the same house rules adapted to section assembly. |
 
 The intended flow is **intake → Figma build**, but each skill stands alone (a
-non-Figma project can use just the intake phase).
+non-Figma project can use just the intake phase). For the build phase, reach for
+**`figma-relume-prototype`** when the project builds on the Relume section library
+or is a marketing/content site, and **`figma-ux-prototype`** when composing app UI
+from an in-file atomic design system.
 
 ## Install (each teammate, once)
 
@@ -65,17 +70,18 @@ more manual installs or refreshes.
 
 ## Figma MCP (required for the build phase)
 
-The `figma-ux-prototype` skill builds in Figma through Figma's **official MCP
-server**, which ships in the `figma@claude-plugins-official` plugin. Install it
-once — it's in Anthropic's built-in marketplace, so there's nothing extra to add:
+Both build skills (`figma-ux-prototype` and `figma-relume-prototype`) build in
+Figma through Figma's **official MCP server**, which ships in the
+`figma@claude-plugins-official` plugin. Install it once — it's in Anthropic's
+built-in marketplace, so there's nothing extra to add:
 
 ```
 /plugin install figma@claude-plugins-official
 ```
 
 Then connect it via OAuth: run `/mcp` and approve in the browser. Until it's
-connected, `figma-ux-prototype` cannot read a Figma file — a file link alone is
-not access. (The `project-intake` skill needs none of this; it has no Figma step.)
+connected, neither build skill can read a Figma file — a file link alone is not
+access. (The `project-intake` skill needs none of this; it has no Figma step.)
 
 ## Updating
 
@@ -161,10 +167,14 @@ ux-workflow-plugin/                     ← git repo = marketplace
 │           │   ├── SKILL.md
 │           │   ├── evals/trigger-eval.json
 │           │   └── references/templates.md
-│           └── figma-ux-prototype/
+│           ├── figma-ux-prototype/       ← build app UI from an in-file atomic DS (shadcn)
+│           │   ├── SKILL.md
+│           │   ├── evals/trigger-eval.json
+│           │   └── references/{house-rules,figma-gotchas}.md
+│           └── figma-relume-prototype/   ← assemble marketing pages from Relume sections
 │               ├── SKILL.md
 │               ├── evals/trigger-eval.json
-│               └── references/{house-rules,figma-gotchas}.md
+│               └── references/{relume-principles,figma-gotchas}.md
 └── README.md
 ```
 

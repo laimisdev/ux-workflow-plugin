@@ -13,8 +13,12 @@ description: >-
   Figma", "make the prototype", "add these pages to the file", "wire the flow",
   "lay out the PDP using our design system". It complements the Figma MCP's
   /figma-use and /figma-generate-design skills (they do the Figma operations; this
-  adds the spec-driven process and house rules). It assumes the design system
-  already exists in the file, so do NOT use it for: visual or brand design like
+  adds the spec-driven process and house rules). Its sibling figma-relume-prototype
+  does the same for pages ASSEMBLED from the Relume section-block library
+  (marketing/landing/content sites); use that one when the project builds on Relume
+  rather than on an in-file atomic design system such as shadcn. It assumes the
+  design system already exists in the file, so do NOT use it for: visual or brand
+  design like
   choosing colors/fonts or restyling (a later phase); building a design system or
   component library from scratch (use /figma-generate-library); converting a Figma
   design INTO code (design-to-code); merely inspecting or reading an existing

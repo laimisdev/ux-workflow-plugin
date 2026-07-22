@@ -1,0 +1,23 @@
+[
+  {"query": "build the landing page in figma by assembling our relume sections", "should_trigger": true},
+  {"query": "assemble the home and pricing pages from the relume library and wire the CTAs", "should_trigger": true},
+  {"query": "we use relume — lay out the marketing site (home, features, pricing, about, contact) in figma", "should_trigger": true},
+  {"query": "add a features page to the figma file by stacking a relume header, a couple of layout sections and a cta", "should_trigger": true},
+  {"query": "extend our relume prototype with a careers page, reusing the existing navbar and footer", "should_trigger": true},
+  {"query": "turn the sitemap into relume wireframe pages in figma with lithuanian copy and connect them", "should_trigger": true},
+  {"query": "compose the product landing page from relume hero, feature and testimonial blocks and hook up the signup button", "should_trigger": true},
+  {"query": "build the marketing website screens in figma from prebuilt section blocks and make it click through", "should_trigger": true},
+  {"query": "pick the right relume sections for the pricing page and assemble it in figma", "should_trigger": true},
+  {"query": "wire the relume-based landing flow and add the mobile nav menu overlay", "should_trigger": true},
+  {"query": "build the app screens in figma using our in-file shadcn design system components", "should_trigger": false},
+  {"query": "lay out the checkout and account flows in figma from our atomic design system", "should_trigger": false},
+  {"query": "design a new brand color palette and pick fonts for the relume site", "should_trigger": false},
+  {"query": "restyle the relume sections to match our brand colors across the whole file", "should_trigger": false},
+  {"query": "export our relume figma page to react + tailwind components", "should_trigger": false},
+  {"query": "read our figma file and list every relume section and its variants", "should_trigger": false},
+  {"query": "set up a relume-style section component library from scratch in figma", "should_trigger": false},
+  {"query": "synthesize the client's notes and sitemap into project docs before we design", "should_trigger": false},
+  {"query": "make a user-journey flowchart in figjam", "should_trigger": false},
+  {"query": "put together a figma slides deck pitching the relume redesign to the client", "should_trigger": false},
+  {"query": "build the marketing landing page in next.js from the relume design", "should_trigger": false}
+]

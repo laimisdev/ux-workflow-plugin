@@ -8,7 +8,7 @@
     {
       "name": "ux-workflow",
       "source": "./plugins/ux-workflow",
-      "description": "Two-phase UX (re)design workflow: project-intake (synthesize inputs into a structured doc set) + figma-ux-prototype (build the screens as a componentized, wired prototype under house rules).",
+      "description": "UX (re)design workflow: project-intake (synthesize inputs into a structured doc set) + figma-ux-prototype (build app UI from an in-file atomic design system) + figma-relume-prototype (assemble marketing pages from Relume section blocks) — both build wired prototypes under fixed house rules.",
       "category": "design"
     }
   ]

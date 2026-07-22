@@ -1,9 +1,9 @@
 {
   "name": "ux-workflow",
-  "description": "A two-phase workflow for UX (re)design projects: synthesize raw inputs into a structured doc set (project-intake), then build the screens as a componentized, wired clickable prototype in Figma under fixed house rules (figma-ux-prototype).",
+  "description": "A UX (re)design workflow: synthesize raw inputs into a structured doc set (project-intake), then build the screens in Figma as a wired clickable prototype under fixed house rules — either from an in-file atomic design system such as shadcn (figma-ux-prototype) or by assembling Relume section blocks (figma-relume-prototype).",
   "author": {
     "name": "Laimonas",
     "email": "laimonas@rimti.lt"
   },
-  "keywords": ["ux", "figma", "design", "workflow", "prototype", "intake"]
+  "keywords": ["ux", "figma", "design", "workflow", "prototype", "intake", "relume", "shadcn"]
 }

@@ -18,5 +18,7 @@
   {"query": "build the checkout page in next.js with stripe", "should_trigger": false},
   {"query": "we have nothing yet — set up a component library and design tokens from scratch in figma", "should_trigger": false},
   {"query": "write the requirements list and per-screen specs for the redesign", "should_trigger": false},
-  {"query": "put together a figma slides deck pitching the redesign to the client", "should_trigger": false}
+  {"query": "put together a figma slides deck pitching the redesign to the client", "should_trigger": false},
+  {"query": "assemble the landing page from our relume section blocks (hero, features, pricing) in figma", "should_trigger": false},
+  {"query": "build the marketing site in figma using the relume library sections", "should_trigger": false}
 ]
